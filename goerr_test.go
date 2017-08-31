@@ -10,7 +10,7 @@ import (
 )
 
 func f1() *Err {
-	err := New("message")
+	err := Error("message")
 	return err.Stack()
 }
 
@@ -72,7 +72,7 @@ func TestLog(t *testing.T) {
 	log.SetOutput(os.Stderr)
 	assert.Contains(t, buf.String(),
 		`Error Stacktrace:
--> github.com/efimovalex/stackerr/goerr_test.go:58 (stackerr.TestLog)
+-> github.com/efimovalex/stackerr/goerr_test.go:70 (stackerr.TestLog)
 -> github.com/efimovalex/stackerr/goerr_test.go:18 (stackerr.f2)
 -> github.com/efimovalex/stackerr/goerr_test.go:13 (stackerr.f1)
 `)
