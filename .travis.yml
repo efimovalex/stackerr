@@ -8,6 +8,14 @@ go:
   - 1.6
   - 1.7
   - 1.8
+before_install:
+  - go get -t -v ./...
 
 script:
   - go test -v ./...
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 7fee0497-8d0f-490b-b8e1-89851dbdfe96
