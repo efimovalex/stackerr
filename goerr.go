@@ -21,10 +21,19 @@ func (e *Err) Error() string {
 	return e.Message
 }
 
-// New - creates a new Err struct
-func New(message string) *Err {
+// Error - creates a new Err struct
+func Error(message string) *Err {
 	err := Err{
 		Message: message,
+	}
+	return err.Stack()
+}
+
+// ErrorWS - creates a new Err struct
+func ErrorWS(message string, statusCode int) *Err {
+	err := Err{
+		Message:    message,
+		StatusCode: statusCode,
 	}
 	return err.Stack()
 }

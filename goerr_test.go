@@ -40,8 +40,8 @@ func TestStackTrace(t *testing.T) {
 `)
 }
 
-func TestNew(t *testing.T) {
-	err := New("message")
+func TestError(t *testing.T) {
+	err := Error("message")
 
 	assert.NotNil(t, err)
 	assert.Equal(t, err.Error(), "message")
@@ -51,7 +51,19 @@ func TestNew(t *testing.T) {
 
 	assert.Equal(t, err.Error(), expected.Error())
 }
+func TestErrorWS(t *testing.T) {
+	err := ErrorWS("message", 200)
 
+	assert.NotNil(t, err)
+	assert.Equal(t, err.Error(), "message")
+	expected := Err{
+		Message:    "message",
+		StatusCode: 200,
+	}
+
+	assert.Equal(t, err.Error(), expected.Error())
+	assert.Equal(t, err.StatusCode, expected.StatusCode)
+}
 func TestLog(t *testing.T) {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
