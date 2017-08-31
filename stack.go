@@ -12,7 +12,7 @@ type Stack struct {
 
 // Sprint returns a pretty printed string of the Stacktrace ready for printng
 func (s *Stack) Sprint() string {
-	stack := "Error Stacktrage:\n"
+	stack := "Error Stacktrace:\n"
 	stackTrace := s
 	for stackTrace != nil {
 		if stackTrace.File != "" && stackTrace.Function != "" {

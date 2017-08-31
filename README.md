@@ -44,7 +44,7 @@ func main() {
 Output:
 
 ```console
-2017/08/31 11:59:54 Error Stacktrage:
+2017/08/31 11:59:54 Error Stacktrace:
 -> github.com/efimovalex/stackerr/example/main.go:24 (main.main)
 -> github.com/efimovalex/stackerr/example/main.go:18 (main.(*t1).f3)
 -> github.com/efimovalex/stackerr/example/main.go:11 (main.f2)

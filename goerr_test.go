@@ -32,7 +32,7 @@ func TestStackTrace(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Equal(t, err.Error(), "message")
 	assert.Equal(t, err.Sprint(),
-		`Error Stacktrage:
+		`Error Stacktrace:
 -> github.com/efimovalex/stackerr/goerr_test.go:30 (stackerr.TestStackTrace)
 -> github.com/efimovalex/stackerr/goerr_test.go:25 (stackerr.(*t1).f3)
 -> github.com/efimovalex/stackerr/goerr_test.go:18 (stackerr.f2)
@@ -71,7 +71,7 @@ func TestLog(t *testing.T) {
 	err.Log()
 	log.SetOutput(os.Stderr)
 	assert.Contains(t, buf.String(),
-		`Error Stacktrage:
+		`Error Stacktrace:
 -> github.com/efimovalex/stackerr/goerr_test.go:58 (stackerr.TestLog)
 -> github.com/efimovalex/stackerr/goerr_test.go:18 (stackerr.f2)
 -> github.com/efimovalex/stackerr/goerr_test.go:13 (stackerr.f1)
