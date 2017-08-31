@@ -7,7 +7,7 @@ An error implementation with StatusCode and Stacktrace
 ## Install
 
 ```console
-$ go get github.com/tools/godep
+$ go get github.com/efimovalex/stackerr
 ```
 
 ## Usage
@@ -16,6 +16,7 @@ $ go get github.com/tools/godep
 package main
 
 import "github.com/efimovalex/stackerr"
+import "fmt"
 
 func f1() *stackerr.Err {
 	err := stackerr.Error("message")
@@ -38,17 +39,29 @@ func main() {
 	ts := t1{}
 	err := ts.f3()
 
+	fmt.Println(err.Sprint())
+
+	fmt.Println(err.Error())
+
 	err.Log()
 }
 ```
 Output:
 
 ```console
-2017/08/31 11:59:54 Error Stacktrace:
--> github.com/efimovalex/stackerr/example/main.go:24 (main.main)
--> github.com/efimovalex/stackerr/example/main.go:18 (main.(*t1).f3)
--> github.com/efimovalex/stackerr/example/main.go:11 (main.f2)
--> github.com/efimovalex/stackerr/example/main.go:6 (main.f1)
+Error Stacktrace:
+-> github.com/efimovalex/stackerr/example/main.go:25 (main.main)
+-> github.com/efimovalex/stackerr/example/main.go:19 (main.(*t1).f3)
+-> github.com/efimovalex/stackerr/example/main.go:12 (main.f2)
+-> github.com/efimovalex/stackerr/example/main.go:7 (main.f1)
+
+message
+
+2017/08/31 12:13:47 Error Stacktrace:
+-> github.com/efimovalex/stackerr/example/main.go:25 (main.main)
+-> github.com/efimovalex/stackerr/example/main.go:19 (main.(*t1).f3)
+-> github.com/efimovalex/stackerr/example/main.go:12 (main.f2)
+-> github.com/efimovalex/stackerr/example/main.go:7 (main.f1)
 ```
 ## Authors
 
