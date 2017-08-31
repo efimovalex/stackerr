@@ -2,6 +2,7 @@ package stackerr
 
 import "fmt"
 
+// Stack - contains stack info
 type Stack struct {
 	File          string
 	Line          int
