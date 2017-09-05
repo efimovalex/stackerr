@@ -37,10 +37,10 @@ func TestStackTrace(t *testing.T) {
 	assert.Equal(t, "message", err.Error())
 	assert.Equal(t,
 		`Error Stacktrace:
--> github.com/efimovalex/stackerr/goerr_test.go:33 (stackerr.TestStackTrace) 
--> github.com/efimovalex/stackerr/goerr_test.go:27 (stackerr.(*t1).f3) 
--> github.com/efimovalex/stackerr/goerr_test.go:20 (stackerr.f2) context
--> github.com/efimovalex/stackerr/goerr_test.go:15 (stackerr.f1) 
+-> github.com/efimovalex/stackerr/goerr_test.go:34 (stackerr.TestStackTrace) 
+-> github.com/efimovalex/stackerr/goerr_test.go:28 (stackerr.(*t1).f3) 
+-> github.com/efimovalex/stackerr/goerr_test.go:21 (stackerr.f2) context
+-> github.com/efimovalex/stackerr/goerr_test.go:16 (stackerr.f1) 
 `, err.Sprint())
 }
 
@@ -82,8 +82,8 @@ func TestLog(t *testing.T) {
 	assert.Contains(t, buf.String(),
 		`Error Stacktrace:
 -> github.com/efimovalex/stackerr/goerr_test.go:79 (stackerr.TestLog) 
--> github.com/efimovalex/stackerr/goerr_test.go:20 (stackerr.f2) context
--> github.com/efimovalex/stackerr/goerr_test.go:15 (stackerr.f1) 
+-> github.com/efimovalex/stackerr/goerr_test.go:21 (stackerr.f2) context
+-> github.com/efimovalex/stackerr/goerr_test.go:16 (stackerr.f1) 
 `)
 }
 
