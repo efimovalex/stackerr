@@ -7,6 +7,7 @@ type Stack struct {
 	File          string
 	Line          int
 	Function      string
+	Context       string
 	CallbackStack *Stack
 }
 
@@ -16,7 +17,7 @@ func (s *Stack) Sprint() string {
 	stackTrace := s
 	for stackTrace != nil {
 		if stackTrace.File != "" && stackTrace.Function != "" {
-			stack += fmt.Sprintf("-> %s:%d (%s)\n", stackTrace.File, stackTrace.Line, stackTrace.Function)
+			stack += fmt.Sprintf("-> %s:%d (%s) %s\n", stackTrace.File, stackTrace.Line, stackTrace.Function, stackTrace.Context)
 		} else {
 			stack += fmt.Sprint("-> out of context\n")
 		}

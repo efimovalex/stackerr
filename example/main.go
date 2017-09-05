@@ -1,16 +1,20 @@
 package main
 
-import "github.com/efimovalex/stackerr"
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/efimovalex/stackerr"
+)
 
 func f1() *stackerr.Err {
-	err := stackerr.Error("message")
+	err := stackerr.NewWithStatusCode("message", http.StatusNotFound)
 	return err.Stack()
 }
 
 func f2() *stackerr.Err {
 	err := f1()
-	return err.Stack()
+	return err.StackWithContext("context")
 }
 
 type t1 struct{}
@@ -28,5 +32,15 @@ func main() {
 
 	fmt.Println(err.Error())
 
+	fmt.Println(err.StatusCode)
+
+	if err.IsNotFound() {
+		fmt.Println("Resource is not found")
+	}
+
+	newErr := stackerr.NewFromError(err)
+
 	err.Log()
+
+	newErr.Log()
 }

@@ -16,8 +16,8 @@ func TestSprint(t *testing.T) {
 	stack3 := Stack{File: "f1.go", Function: "f1.f2", Line: 3, CallbackStack: &stack2}
 	assert.Equal(t, stack3.Sprint(),
 		`Error Stacktrace:
--> f1.go:3 (f1.f2)
--> f2.go:3 (f2.f2)
+-> f1.go:3 (f1.f2) 
+-> f2.go:3 (f2.f2) 
 -> out of context
 `)
 }
