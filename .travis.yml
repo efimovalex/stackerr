@@ -9,10 +9,11 @@ go:
   - 1.17
 
 before_install:
-  - go get -t -v ./...
+  - go mod tidy
+  - go mod vendor
 
 script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic
+  - go test -mod=vendor -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t 7fee0497-8d0f-490b-b8e1-89851dbdfe96
