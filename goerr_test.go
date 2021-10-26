@@ -3,6 +3,7 @@ package stackerr
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -30,18 +31,19 @@ func (t *t1) f3() *Err {
 }
 
 func TestStackTrace(t *testing.T) {
+	path, _ := os.Getwd()
 	ts := t1{}
 	err := ts.f3()
 
 	assert.NotNil(t, err)
 	assert.Equal(t, "message", err.Error())
 	assert.Equal(t,
-		`Error Stacktrace:
--> github.com/efimovalex/stackerr/goerr_test.go:34 (stackerr.TestStackTrace) 
--> github.com/efimovalex/stackerr/goerr_test.go:28 (stackerr.(*t1).f3) 
--> github.com/efimovalex/stackerr/goerr_test.go:21 (stackerr.f2) context
--> github.com/efimovalex/stackerr/goerr_test.go:16 (stackerr.f1) 
-`, err.Sprint())
+		fmt.Sprintf(`Error Stacktrace:
+-> %[1]s/goerr_test.go:36 (stackerr.TestStackTrace) 
+-> %[1]s/goerr_test.go:30 (stackerr.(*t1).f3) 
+-> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:18 (stackerr.f1) 
+`, path), err.Sprint())
 }
 
 func TestNew(t *testing.T) {
@@ -74,17 +76,18 @@ func TestNewWithStatusCode(t *testing.T) {
 	assert.Equal(t, http.StatusOK, err.StatusCode)
 }
 func TestLog(t *testing.T) {
+	path, _ := os.Getwd()
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	err := f2()
 	err.Log()
 	log.SetOutput(os.Stderr)
 	assert.Contains(t, buf.String(),
-		`Error Stacktrace:
--> github.com/efimovalex/stackerr/goerr_test.go:79 (stackerr.TestLog) 
--> github.com/efimovalex/stackerr/goerr_test.go:21 (stackerr.f2) context
--> github.com/efimovalex/stackerr/goerr_test.go:16 (stackerr.f1) 
-`)
+		fmt.Sprintf(`Error Stacktrace:
+-> %[1]s/goerr_test.go:83 (stackerr.TestLog) 
+-> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:18 (stackerr.f1) 
+`, path))
 }
 
 func TestIsNotFound(t *testing.T) {
@@ -98,6 +101,7 @@ func TestIsNotFound(t *testing.T) {
 }
 
 func TestPrint(t *testing.T) {
+	path, _ := os.Getwd()
 	old := os.Stdout // keep backup of the real stdout
 	r, w, _ := os.Pipe()
 	os.Stdout = w
@@ -117,9 +121,9 @@ func TestPrint(t *testing.T) {
 	out := <-outC
 
 	assert.Equal(t, out,
-		`Error Stacktrace:
--> github.com/efimovalex/stackerr/goerr_test.go:112 (stackerr.TestPrint) 
--> github.com/efimovalex/stackerr/goerr_test.go:21 (stackerr.f2) context
--> github.com/efimovalex/stackerr/goerr_test.go:16 (stackerr.f1) 
-`)
+		fmt.Sprintf(`Error Stacktrace:
+-> %[1]s/goerr_test.go:117 (stackerr.TestPrint) 
+-> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:18 (stackerr.f1) 
+`, path))
 }

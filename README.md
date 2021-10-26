@@ -67,22 +67,23 @@ Output:
 
 ```console
 Error Stacktrace:
--> github.com/efimovalex/stackerr/example/main.go:29 (main.main)
--> github.com/efimovalex/stackerr/example/main.go:23 (main.(*t1).f3)
--> github.com/efimovalex/stackerr/example/main.go:16 (main.f2) context
--> github.com/efimovalex/stackerr/example/main.go:11 (main.f1)
+-> /home/efi/workspace/stackerr/example/main.go:29 (main.main) 
+-> /home/efi/workspace/stackerr/example/main.go:24 (main.(*t1).f3) 
+-> /home/efi/workspace/stackerr/example/main.go:17 (main.f2) context
+-> /home/efi/workspace/stackerr/example/main.go:11 (main.f1) 
 
 message
-
 404
-
 Resource is not found
 
-2017/09/05 17:32:15 Error Stacktrace:
--> github.com/efimovalex/stackerr/example/main.go:29 (main.main)
--> github.com/efimovalex/stackerr/example/main.go:23 (main.(*t1).f3)
--> github.com/efimovalex/stackerr/example/main.go:16 (main.f2) context
--> github.com/efimovalex/stackerr/example/main.go:11 (main.f1)
+2021/10/26 17:58:11 Error Stacktrace:
+-> /home/efi/workspace/stackerr/example/main.go:29 (main.main) 
+-> /home/efi/workspace/stackerr/example/main.go:24 (main.(*t1).f3) 
+-> /home/efi/workspace/stackerr/example/main.go:17 (main.f2) context
+-> /home/efi/workspace/stackerr/example/main.go:11 (main.f1) 
+
+2021/10/26 17:58:11 Error Stacktrace:
+-> /home/efi/workspace/stackerr/example/main.go:41 (main.main) 
 ```
 ## Authors
 
