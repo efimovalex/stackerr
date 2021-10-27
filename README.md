@@ -1,5 +1,5 @@
 # StackErr
-[![Build Status](https://travis-ci.org/efimovalex/stackerr.svg?branch=master)](https://travis-ci.org/efimovalex/stackerr)
+[![CircleCI](https://circleci.com/gh/efimovalex/stackerr/tree/master.svg?style=svg)](https://circleci.com/gh/efimovalex/stackerr/tree/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/efimovalex/stackerr)](https://goreportcard.com/report/github.com/efimovalex/stackerr) [![codecov](https://codecov.io/gh/efimovalex/stackerr/branch/master/graph/badge.svg)](https://codecov.io/gh/efimovalex/stackerr) [![GoDoc](https://godoc.org/github.com/efimovalex/stackerr?status.svg)](https://godoc.org/github.com/efimovalex/stackerr)
 
 An error implementation with StatusCode and Stacktrace
