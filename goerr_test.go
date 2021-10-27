@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -32,6 +33,9 @@ func (t *t1) f3() *Err {
 
 func TestStackTrace(t *testing.T) {
 	path, _ := os.Getwd()
+	if os.Getenv("GOPATH") != "" {
+		path = strings.Replace(path, os.Getenv("GOPATH")+"/src/", "", -1)
+	}
 	ts := t1{}
 	err := ts.f3()
 
@@ -39,9 +43,9 @@ func TestStackTrace(t *testing.T) {
 	assert.Equal(t, "message", err.Error())
 	assert.Equal(t,
 		fmt.Sprintf(`Error Stacktrace:
--> %[1]s/goerr_test.go:36 (stackerr.TestStackTrace) 
--> %[1]s/goerr_test.go:30 (stackerr.(*t1).f3) 
--> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:40 (stackerr.TestStackTrace) 
+-> %[1]s/goerr_test.go:31 (stackerr.(*t1).f3) 
+-> %[1]s/goerr_test.go:24 (stackerr.f2) context
 -> %[1]s/goerr_test.go:18 (stackerr.f1) 
 `, path), err.Sprint())
 }
@@ -77,6 +81,10 @@ func TestNewWithStatusCode(t *testing.T) {
 }
 func TestLog(t *testing.T) {
 	path, _ := os.Getwd()
+	if os.Getenv("GOPATH") != "" {
+		path = strings.Replace(path, os.Getenv("GOPATH")+"/src/", "", -1)
+	}
+
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	err := f2()
@@ -84,8 +92,8 @@ func TestLog(t *testing.T) {
 	log.SetOutput(os.Stderr)
 	assert.Contains(t, buf.String(),
 		fmt.Sprintf(`Error Stacktrace:
--> %[1]s/goerr_test.go:83 (stackerr.TestLog) 
--> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:91 (stackerr.TestLog) 
+-> %[1]s/goerr_test.go:24 (stackerr.f2) context
 -> %[1]s/goerr_test.go:18 (stackerr.f1) 
 `, path))
 }
@@ -102,6 +110,9 @@ func TestIsNotFound(t *testing.T) {
 
 func TestPrint(t *testing.T) {
 	path, _ := os.Getwd()
+	if os.Getenv("GOPATH") != "" {
+		path = strings.Replace(path, os.Getenv("GOPATH")+"/src/", "", -1)
+	}
 	old := os.Stdout // keep backup of the real stdout
 	r, w, _ := os.Pipe()
 	os.Stdout = w
@@ -122,8 +133,8 @@ func TestPrint(t *testing.T) {
 
 	assert.Equal(t, out,
 		fmt.Sprintf(`Error Stacktrace:
--> %[1]s/goerr_test.go:117 (stackerr.TestPrint) 
--> %[1]s/goerr_test.go:23 (stackerr.f2) context
+-> %[1]s/goerr_test.go:128 (stackerr.TestPrint) 
+-> %[1]s/goerr_test.go:24 (stackerr.f2) context
 -> %[1]s/goerr_test.go:18 (stackerr.f1) 
 `, path))
 }
